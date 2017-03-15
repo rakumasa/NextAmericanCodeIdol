@@ -1,0 +1,38 @@
+container {
+  display: flex;
+}
+
+.button, .btn {
+  margin-top: 5px;
+  margin-left: 3px;
+}
+
+#big {
+padding: 0px 14px 0px 14px;
+}
+
+#big1 {
+padding: 0px 20px 0px 20px;
+}
+
+#big2 {
+padding: 0px 25px 0px 25px;
+}
+
+#left {
+/*padding-bottom: 200px;*/
+height: 550px;
+max-height: 560px;
+}
+
+#quiz {
+  /*padding-bottom: 105px;*/
+  height: 265px;
+  max-height: 270px;
+}
+
+#message {
+  /*padding-bottom: 105px;*/
+  height: 265px;
+  max-height: 270px;
+}
