@@ -15,49 +15,36 @@ $(document).ready(function() {
     { cat: "CSS", id: 3, q: "Which is the correct CSS syntax?", an1: "body:color=black;", an2:"{body:color=black;}", an3:"body {color: black;}", correct: "body {color: black;}", link: "CSS syntax"},
     { cat: "CSS", id: 4, q: " How would you change a background color?", an1: "Call grandfather", an2:"background-color: white;", an3:"color: DarkCyan", correct: "background-color: white;", link: "CSS background color"},
     { cat: "CSS", id: 5, q: "What does CSS stand for?", an1: "Cascading Style Sheets", an2:"Creative Style Sheets", an3:"Colorful Style Sheets", correct: "Cascading Style Sheets", link: "what is CSS"},
-    { cat: "JS", id: 1, q: "What does CSS stand for?", an1: "Cascading Style Sheets", an2:"Creative Style Sheets", an3:"Colorful Style Sheets", correct: "Cascading Style Sheets", link: "what is CSS"},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    { cat: "JS", id: 1, q: "Inside which HTML element do we put the JavaScript?", an1: "javascript", an2:"script", an3:"scripting", correct: "script", link: "javascript HTML element"},
+    { cat: "JS", id: 2, q: "Where is the correct place to insert a JavaScript?", an1: "head and body section", an2:"head section", an3:"body section", correct: "head and body section", link: "insert javascript HTML"},
+    { cat: "JS", id: 3, q: 'What is the correct syntax for referring to an external script called "xxx.js"?', an1: 'script src="xxx.js"', an2:'script name="xxx.js"', an3:'script href="xxx.js"', correct: 'script href="xxx.js"', link: "javascript external script"},
+    { cat: "JS", id: 4, q: 'How do you write "Hello World" in an alert box?', an1: 'alert("Hello World");', an2:"Scream loud", an3: 'msg("Hello father");', correct: 'alert("Hello World");', link: "javascript alert"},
+    { cat: "JS", id: 5, q: 'How do you create a function in JavaScript?', an1: 'function myFunction()', an2:"function = myFunction()", an3: 'function:myFunction()', correct: 'function myFunction()', link: "javascript function"}
   ];
 
-
-
   //Messages for each columns
-  // var rule = ;
+  var rule = '<h4 class="black-text">Game instruction<h4><ol class="black-text"><li>Pick question from left column</li><li>Select your answer</li><li></li></ol>';
 
-
-
-  var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>'
-
-  var excuse = '<h2 class="center white-text">I do NOT make excuse.</h2><h2 class="center white-text">I make results.</h2>'
+  var excuse = '<h2 class="center white-text">I do NOT make excuse.</h2><h2 class="center white-text">I make results.</h2>';
 
   var good = '<h1 class="center white-text">Great job!</h1>';
 
-  var next = '<h1 class="center">Please choose next question.</h1>';
+  var next = '<h2 class="center">Please choose next question.</h2>';
+
+  var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>';
+
+  var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","STOP WISHING.<br>START DOING","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is 21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow", "Make Code Your Best Friend","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","You Are The Semicolon to My STATEMENTS","Without you<br>my world is NULL","MOM,<br>Can I go home?"];
+
+  //Shuffle the phrase for fight
+  // var randomSort = phrase.sort(function(a, b){return 0.5 - Math.random()});
+  // var shuffle = '<h2 class="center white-text">' + randomSort[1] + '</h2>';
+
+  //Insert a content in top column
+  $("#quiz").html(rule);
 
   //Insert a content in bottom column
   $("#message").html(fight);
   $("#message").css("background-color", "#bdbdbd" );
-
-  //Insert a content in top column
-
-
 
   //Reload a page from reset button
   $('#something').click(function() {
@@ -74,9 +61,10 @@ $(document).ready(function() {
     var changeClass = getClass + " disabled"; //create a name to disabled button
     var updateClass = $(this).attr("class", changeClass); //update name to disable the button
 
-    //Refresh the message box
-    $('#message').html(excuse);
-
+    //Shuffle the message box
+    var randomSort = phrase.sort(function(a, b){return 0.5 - Math.random()});
+    var shuffle = '<h2 class="center white-text">' + randomSort[3] + '</h2>';
+    $('#message').html(shuffle);
 
     for (var i=0;i<library.length;i++){
 
@@ -142,7 +130,6 @@ $(document).ready(function() {
     }//end of if
   }); //end of answer click function
 
-
   //Function for finding index number of question
   function find_current_question_index(){
     var found_question = $("#current_question").text(); //find current question
@@ -155,13 +142,6 @@ $(document).ready(function() {
     }
     return found_index;
   } //end of function
-
-
-
-
-
-
-
 
 
 
