@@ -1,12 +1,36 @@
 $(document).ready(function() {
 
+  //Place holder from youtube data
+  var localData = [];
+
+  //Library for question and answer
   var library = [
-    { cat: "HTML", id: 1, q: "What does HTML stands for?", an1: "Hyper Text Markup Language", an2:"Hyper Typo Margin Language", an3:"How to Make Lasagna", correct: "Hyper Text Markup Language"},
+    { cat: "HTML", id: 1, q: "What does HTML stands for?", an1: "Hyper Text Markup Language", an2:"Hyper Typo Margin Language", an3:"How to Make Lasagna", correct: "Hyper Text Markup Language", link: "what is HTML5?"},
     { cat: "HTML", id: 2, q: "How many tags are in a regular element", an1: "2", an2:"1", an3:"3", correct: "2"},
     { cat: "HTML", id: 3, q: "What is difference in an opening tag and a closing tag", an1: "Opening tag has a / in front", an2:"Closing tag has a / in front", an3:"There is no difference", correct: "Closing tag has a / in front"},
     { cat: "HTML", id: 4, q: "What type of tag is this?", an1: "Break tag", an2:"A broken one", an3:"An opening tag", correct: "Break tag"},
     { cat: "HTML", id: 5, q: "Is this an opening tag or a closing tag?", an1: "Opening", an2:"Closing", an3:"Nither", correct: "Opening"}
   ];
+
+
+
+  //Message for each columns
+  var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>'
+
+  var excuse = '<h2 class="center white-text">I do NOT make excuse.</h2><h2 class="center white-text">I make results.</h2>'
+
+  var good = '<h1 class="center white-text">Great job!</h1>';
+
+  var next = '<h1 class="center">Please choose next question.</h1>';
+
+  var video = '<video width="100%" class="responsive-video" controls><source src="http://clips.vorwaerts-gmbh.de/big_buckbunny.mp4" type="video/mp4"></video>';
+
+
+
+  //Insert a word in bottom box
+  $("#message").html(fight);
+  $("#message").css("background-color", "#bdbdbd" );
+
 
   //Reload a page from reset button
   $('#something').click(function() {
@@ -24,7 +48,7 @@ $(document).ready(function() {
     var updateClass = $(this).attr("class", changeClass); //update name to disable the button
 
     //Refresh the message box
-    $('#message').html('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+    $('#message').html(excuse);
 
 
     for (var i=0;i<library.length;i++){
@@ -47,17 +71,68 @@ $(document).ready(function() {
 
     if(seeAns === library[index].correct) {
       //Show Good job message on the left column
-      $('#message').html('<h1 class="center red-text">' + "Good job!" + "</h1>");
+      $('#message').html(good);
       //Show the message of "choose next question"
-      $('#quiz').html('<h2 class="center green-text">Please choose next question</h2>');
+      $('#quiz').html(next);
       //Add point to score board
 
 
     } else {
-      alert("Wrong answer!")
+      //keyword for searching youtube video
+      var url = "https://www.googleapis.com/youtube/v3/search?id=q1project-161420&key=AIzaSyAkEPhD7UaRwxc8-0VUX-4ATTtV8mvzhAw&part=snippet&q=" + encodeURI(library[index].link);
+
+      // Grab data from youtube
+          $.getJSON(url).then(function(data){
+            //Part1 create a local database(I have more flexibility later)
+            var allData = data.items;
+
+            for (var i=0;i<allData.length;i++){
+              var newObj = {
+                id: allData[i].id.videoId, //
+                title: allData[i].snippet.title,
+              }//end of newobj
+              localData.push(newObj);
+            } //end of for loop
+
+            //Part2 Create a array for title and videoURL
+            var titleArr = []; //["What is HTML5?", "HTML5 as Fast As Possible", "What is HTML5? | lynda.com overview", "What is HTML5", "What is the difference between HTML5 and CSS3? | lynda.com"]
+            var videoURL = []; //["mzPxo7Y6JyA", "IsXEVQRaTX8", "4oX9DXH4fiA", "um3DRKlN3-8", "j_pQp3KQulk"]
+            for (var i=0;i<localData.length;i++){
+                titleArr.push(localData[i].title);
+                videoURL.push(localData[i].id);
+                console.log(videoURL)
+              }// end of loop
+
+            //Part3 Pick up two videos from titleArray
+            var selected1 = '<h1 class="center white-text"></h1>';
+            var selected2 = '<h1 class="center white-text"></h1>';
+
+            //Part4 show two videos on bottom column
+            $('#message').html(selected);
+
+
+
+
+
+
+
+        }) //end of json
+
+
+
+
+
+
+      // $('#message').css("background-color","");
+      // $('#message').html("");
+      // $('#message').append(video);
       //Run Youtube API for showing the lecture video
+
+      alert("Wrong answer!")
+
     }//end of if
   }); //end of answer click function
+
 
   //Function for finding index number of question
   function find_current_question_index(){
