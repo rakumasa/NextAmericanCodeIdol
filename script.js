@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+  //Counter for button
+  var counter = 0;
+
   //Place holder from youtube data
   var localData = [];
 
@@ -23,21 +26,17 @@ $(document).ready(function() {
   ];
 
   //Messages for each columns
-  var rule = '<h4 class="black-text">Game instruction<h4><ol class="black-text"><li>Pick question from left column</li><li>Select your answer</li><li></li></ol>';
+  var rule = '<h4 class="black-text"><u>Game instruction</u></h4><ol class="black-text"><li>Pick question from a left column</li><li>Select your answer</li><li>When you complete all question, you can hit<br>a reset button(top-right) and restart again.</li><li>Enjoy the game!</li></ol>';
 
-  var excuse = '<h2 class="center white-text">I do NOT make excuse.</h2><h2 class="center white-text">I make results.</h2>';
+  var good = '<h1 class="center blue-text">Great job!</h1>';
 
-  var good = '<h1 class="center white-text">Great job!</h1>';
+  var choose = '<h1 class="center red-text">Please select<br>your answer</h1>';
 
-  var next = '<h2 class="center">Please choose next question.</h2>';
+  var next = '<h2 class="center">Please choose<br>next question.</h2>';
 
   var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>';
 
-  var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","STOP WISHING.<br>START DOING","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is 21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow", "Make Code Your Best Friend","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","You Are The Semicolon to My STATEMENTS","Without you<br>my world is NULL","MOM,<br>Can I go home?"];
-
-  //Shuffle the phrase for fight
-  // var randomSort = phrase.sort(function(a, b){return 0.5 - Math.random()});
-  // var shuffle = '<h2 class="center white-text">' + randomSort[1] + '</h2>';
+  var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","STOP WISHING.<br>START DOING","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is<br>21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow", "Make Code<br>Your Best Friend","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","You Are The Semicolon to My STATEMENTS","Without you<br>my world is NULL","Hey MOM,<br>Can I go home?"];
 
   //Insert a content in top column
   $("#quiz").html(rule);
@@ -78,25 +77,34 @@ $(document).ready(function() {
 
   //Submit answer and check answer
   $('#quiz').on("click", "#ansbtn", function(){ // this function help you to find the #ansbtn which is created by DOM
+
     //get what answer from option
     var current_question = $("#current_question").html(); //Look a question through "id"
 
     var seeAns = $('.browser-default').find('option:selected').text(); //What does stands for HTML etc..
     var index = find_current_question_index();
 
-    if(seeAns === library[index].correct) {
-      //Show Good job message on the left column
-      $('#message').html(good);
-      //Show the message of "choose next question"
-      $('#quiz').html(next);
-      //Add point to score board
+    if(seeAns === "Choose your option") {
+      //Show please select your answer on the bottom column
+      $('#message').html(choose);
+      } else if(seeAns === library[index].correct) {
+        //Add 1 to counter everytime you get a right answer
+        console.log(counter);
+        counter = counter + 1;
+        //If counter reach to 14, all question is done. If it's not, keep going
+        if (counter < 3){
+          //Show Good job message on the bottom column
+          $('#message').html(good);
+          //Show the message of "choose next question"
+          $('#quiz').html(next);
+        } else {
+          console.log("Success");
+        }
+      } else {
+        //keyword for searching youtube video
+        var url = "https://www.googleapis.com/youtube/v3/search?id=q1project-161420&key=AIzaSyAkEPhD7UaRwxc8-0VUX-4ATTtV8mvzhAw&part=snippet&q=" + encodeURI(library[index].link);
 
-
-    } else {
-      //keyword for searching youtube video
-      var url = "https://www.googleapis.com/youtube/v3/search?id=q1project-161420&key=AIzaSyAkEPhD7UaRwxc8-0VUX-4ATTtV8mvzhAw&part=snippet&q=" + encodeURI(library[index].link);
-
-      // Grab data from youtube
+          // Grab data from youtube
           $.getJSON(url).then(function(data){
             //Part1 create a local database(I have more flexibility later)
             var allData = data.items;
@@ -115,19 +123,19 @@ $(document).ready(function() {
             for (var i=0;i<localData.length;i++){
                 titleArr.push(localData[i].title);
                 videoURL.push(localData[i].id);
-              }// end of loop
+              } // end of loop
 
             //Part3 Create variable for youtube link
             var youtube = "https://www.youtube.com/watch?v=";
 
             //Part4 Pick up three videos from titleArray
-            var selected = '<h4 class="white-text">No worry! Watch below videos and learn about what it is!</h4><ul class="white-text"><li><a href="' + youtube + videoURL[0] +'" target="_blank">' + titleArr[0] + '</a></li><li><a href="' + youtube + videoURL[1] +'" target="_blank">' + titleArr[1] + '</a></li><li><a href="' + youtube + videoURL[2] +'" target="_blank">' + titleArr[2] + '</a></li></ul>';
+            var selected = '<h4 class="white-text">No worry! Watch below videos and learn about what it is!</h4><ul class="white-text"><li><a href="' + youtube + videoURL[0] +'" target="_blank">' + titleArr[0].substr(0, 50) + '</a></li><li><a href="' + youtube + videoURL[1] +'" target="_blank">' + titleArr[1].substr(0, 50) + '</a></li><li><a href="' + youtube + videoURL[2] +'" target="_blank">' + titleArr[2].substr(0,50) + '</a></li></ul>';
 
             //Part5 show two videos on bottom column
             $('#message').html(selected);
 
-        }) //end of json
-    }//end of if
+          }) //end of json
+      }//end of if
   }); //end of answer click function
 
   //Function for finding index number of question
@@ -142,12 +150,4 @@ $(document).ready(function() {
     }
     return found_index;
   } //end of function
-
-
-
-
-
-
-
-
-  }); //End of JQuery
+}); //End of JQuery

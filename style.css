@@ -9,12 +9,19 @@ body {
   height: 100%;
   width: 100%;
   position: relative;
-  text-shadow: 1px 1px 1px black;
-
+  /*text-shadow: 1px 1px 1px black;*/
 }
 
 #top,#footer {
   opacity:0.65;
+}
+
+li {
+  font-size: 20px;
+}
+
+.left.brand-logo {
+
 }
 
 .button, .btn {
@@ -46,6 +53,8 @@ display: block;
   height: 265px;
   max-height: 270px;
   display: block;
+  padding-top: 5px;
+  /*padding-left: 10px;*/
 }
 
 #message {
