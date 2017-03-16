@@ -6,15 +6,43 @@ $(document).ready(function() {
   //Library for question and answer
   var library = [
     { cat: "HTML", id: 1, q: "What does HTML stands for?", an1: "Hyper Text Markup Language", an2:"Hyper Typo Margin Language", an3:"How to Make Lasagna", correct: "Hyper Text Markup Language", link: "what is HTML5?"},
-    { cat: "HTML", id: 2, q: "How many tags are in a regular element", an1: "2", an2:"1", an3:"3", correct: "2"},
-    { cat: "HTML", id: 3, q: "What is difference in an opening tag and a closing tag", an1: "Opening tag has a / in front", an2:"Closing tag has a / in front", an3:"There is no difference", correct: "Closing tag has a / in front"},
-    { cat: "HTML", id: 4, q: "What type of tag is this?", an1: "Break tag", an2:"A broken one", an3:"An opening tag", correct: "Break tag"},
-    { cat: "HTML", id: 5, q: "Is this an opening tag or a closing tag?", an1: "Opening", an2:"Closing", an3:"Nither", correct: "Opening"}
+    { cat: "HTML", id: 2, q: "How many tags are in a regular element", an1: "2", an2:"1", an3:"3", correct: "2", link: "what is HTML tag?"},
+    { cat: "HTML", id: 3, q: "What is difference in an opening tag and a closing tag", an1: "Opening tag has a / in front", an2:"Closing tag has a / in front", an3:"There is no difference", correct: "Closing tag has a / in front", link: "opening closing tag?"},
+    { cat: "HTML", id: 4, q: "Who is making the Web standards?", an1: "My mom", an2:"Google", an3:"The World Wide Web Consortium", correct: "The World Wide Web Consortium", link: "what is wide web consortium?"},
+    { cat: "HTML", id: 5, q: "All HTML tags are enclosed in what?", an1: "< and >", an2:"Meat sauce", an3:"# and #", correct: "< and >", link: "what is HTML tag"},
+    { cat: "CSS", id: 1, q: " What is the difference between HTML and CSS?", an1: "CSS is a markup language unlike HTML", an2:"There is no difference.", an3:"HTML deals with the function of the site and CSS the form", correct: "HTML deals with the function of the site and CSS the form", link: "diffrence HTML CSS"},
+    { cat: "CSS", id: 2, q: "Which HTML tag is used to define an internal style sheet?", an1: "style", an2:"script", an3:"css", correct: "style", link: "css style"},
+    { cat: "CSS", id: 3, q: "Which is the correct CSS syntax?", an1: "body:color=black;", an2:"{body:color=black;}", an3:"body {color: black;}", correct: "body {color: black;}", link: "CSS syntax"},
+    { cat: "CSS", id: 4, q: " How would you change a background color?", an1: "Call grandfather", an2:"background-color: white;", an3:"color: DarkCyan", correct: "background-color: white;", link: "CSS background color"},
+    { cat: "CSS", id: 5, q: "What does CSS stand for?", an1: "Cascading Style Sheets", an2:"Creative Style Sheets", an3:"Colorful Style Sheets", correct: "Cascading Style Sheets", link: "what is CSS"},
+    { cat: "JS", id: 1, q: "What does CSS stand for?", an1: "Cascading Style Sheets", an2:"Creative Style Sheets", an3:"Colorful Style Sheets", correct: "Cascading Style Sheets", link: "what is CSS"},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ];
 
 
 
-  //Message for each columns
+  //Messages for each columns
+  // var rule = ;
+
+
+
   var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>'
 
   var excuse = '<h2 class="center white-text">I do NOT make excuse.</h2><h2 class="center white-text">I make results.</h2>'
@@ -23,13 +51,12 @@ $(document).ready(function() {
 
   var next = '<h1 class="center">Please choose next question.</h1>';
 
-  var video = '<video width="100%" class="responsive-video" controls><source src="http://clips.vorwaerts-gmbh.de/big_buckbunny.mp4" type="video/mp4"></video>';
-
-
-
-  //Insert a word in bottom box
+  //Insert a content in bottom column
   $("#message").html(fight);
   $("#message").css("background-color", "#bdbdbd" );
+
+  //Insert a content in top column
+
 
 
   //Reload a page from reset button
@@ -100,36 +127,18 @@ $(document).ready(function() {
             for (var i=0;i<localData.length;i++){
                 titleArr.push(localData[i].title);
                 videoURL.push(localData[i].id);
-                console.log(videoURL)
               }// end of loop
 
-            //Part3 Pick up two videos from titleArray
-            var selected1 = '<h1 class="center white-text"></h1>';
-            var selected2 = '<h1 class="center white-text"></h1>';
+            //Part3 Create variable for youtube link
+            var youtube = "https://www.youtube.com/watch?v=";
 
-            //Part4 show two videos on bottom column
+            //Part4 Pick up three videos from titleArray
+            var selected = '<h4 class="white-text">No worry! Watch below videos and learn about what it is!</h4><ul class="white-text"><li><a href="' + youtube + videoURL[0] +'" target="_blank">' + titleArr[0] + '</a></li><li><a href="' + youtube + videoURL[1] +'" target="_blank">' + titleArr[1] + '</a></li><li><a href="' + youtube + videoURL[2] +'" target="_blank">' + titleArr[2] + '</a></li></ul>';
+
+            //Part5 show two videos on bottom column
             $('#message').html(selected);
 
-
-
-
-
-
-
         }) //end of json
-
-
-
-
-
-
-      // $('#message').css("background-color","");
-      // $('#message').html("");
-      // $('#message').append(video);
-      //Run Youtube API for showing the lecture video
-
-      alert("Wrong answer!")
-
     }//end of if
   }); //end of answer click function
 
