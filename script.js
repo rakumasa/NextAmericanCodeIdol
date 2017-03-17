@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  //Counter for button
+  //Counter for answer button(only count up with selecting a right answer)
   var counter = 0;
 
   //Place holder from youtube data
@@ -26,15 +26,17 @@ $(document).ready(function() {
   ];
 
   //Messages for each columns
-  var rule = '<h4 class="black-text"><u>Game instruction</u></h4><ol class="black-text"><li>Pick question from a left column</li><li>Select your answer</li><li>When you complete all question, you can hit<br>a reset button(top-right) and restart again.</li><li>Enjoy the game!</li></ol>';
+  var rule = '<h4 class="black-text"><u>Game instruction</u></h4><ol class="black-text"><li>Pick question from left column</li><li>Select your answer</li><li>When you complete all questions, you can hit<br>the reset button (top-right) and start again.</li><li>Enjoy the game!</li></ol>';
 
   var good = '<h1 class="center blue-text">Great job!</h1>';
+
+  var complete = '<h1 class="center blue-text">Conglatulation! Now you are the American Code Idol! This is a gift video from me.  Keep brush your skill.</h1>'; //Add a reset button
 
   var choose = '<h1 class="center red-text">Please select<br>your answer</h1>';
 
   var next = '<h2 class="center">Please choose<br>next question.</h2>';
 
-  var fight = '<h1 class="center white-text">Ready for a next adventure?</h1>';
+  var fight = '<h2 class="center white-text">Ready to be<br>the American Code Idol?</h2>';
 
   var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","STOP WISHING.<br>START DOING","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is<br>21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow", "Make Code<br>Your Best Friend","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","You Are The Semicolon to My STATEMENTS","Without you<br>my world is NULL","Hey MOM,<br>Can I go home?"];
 
@@ -92,12 +94,14 @@ $(document).ready(function() {
         console.log(counter);
         counter = counter + 1;
         //If counter reach to 14, all question is done. If it's not, keep going
-        if (counter < 3){
+        if (counter < 4){ //Update it later
           //Show Good job message on the bottom column
           $('#message').html(good);
           //Show the message of "choose next question"
           $('#quiz').html(next);
         } else {
+          //When complete all quiz, show up the reset button with message
+          $('#message').html(complete);
           console.log("Success");
         }
       } else {
