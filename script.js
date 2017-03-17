@@ -13,8 +13,8 @@ $(document).ready(function() {
     { cat: "HTML", id: 3, q: "What is difference in an opening tag and a closing tag", an1: "Opening tag has a / in front", an2:"Closing tag has a / in front", an3:"There is no difference", correct: "Closing tag has a / in front", link: "opening closing tag?"},
     { cat: "HTML", id: 4, q: "Who is making the Web standards?", an1: "My mom", an2:"Google", an3:"The World Wide Web Consortium", correct: "The World Wide Web Consortium", link: "what is wide web consortium?"},
     { cat: "HTML", id: 5, q: "All HTML tags are enclosed in what?", an1: "< and >", an2:"Meat sauce", an3:"# and #", correct: "< and >", link: "what is HTML tag"},
-    { cat: "CSS", id: 1, q: " What is the difference between HTML and CSS?", an1: "CSS is a markup language unlike HTML", an2:"There is no difference.", an3:"HTML deals with the function of the site and CSS the form", correct: "HTML deals with the function of the site and CSS the form", link: "diffrence HTML CSS"},
-    { cat: "CSS", id: 2, q: "Which HTML tag is used to define an internal style sheet?", an1: "style", an2:"script", an3:"css", correct: "style", link: "css style"},
+    { cat: "CSS", id: 1, q: "What is the difference between HTML and CSS?", an1: "CSS is a markup language unlike HTML", an2:"There is no difference.", an3:"HTML deals with the function of the site and CSS the form", correct: "HTML deals with the function of the site and CSS the form", link: "diffrence HTML CSS"},
+    { cat: "CSS", id: 2, q: "Which HTML tag is used to define an internal style sheet?", an1: "style", an2:"court", an3:"css", correct: "style", link: "css style"},
     { cat: "CSS", id: 3, q: "Which is the correct CSS syntax?", an1: "body:color=black;", an2:"{body:color=black;}", an3:"body {color: black;}", correct: "body {color: black;}", link: "CSS syntax"},
     { cat: "CSS", id: 4, q: " How would you change a background color?", an1: "Call grandfather", an2:"background-color: white;", an3:"color: DarkCyan", correct: "background-color: white;", link: "CSS background color"},
     { cat: "CSS", id: 5, q: "What does CSS stand for?", an1: "Cascading Style Sheets", an2:"Creative Style Sheets", an3:"Colorful Style Sheets", correct: "Cascading Style Sheets", link: "what is CSS"},
@@ -30,15 +30,17 @@ $(document).ready(function() {
 
   var good = '<h1 class="center blue-text">Great job!</h1>';
 
-  var complete = '<h1 class="center blue-text">Conglatulation! Now you are the American Code Idol! This is a gift video from me.  Keep brush your skill.</h1>'; //Add a reset button
+  var complete = '<h4 class="center blue-text">Conglatulation!<br>You are the American Code Idol!<br>Keep brushing up your coding skill!<br><br><a class="grey-text text-lighten-1" href="https://www.youtube.com/watch?v=Ct6BUPvE2sM" target="_blank">Secret link</a></h4>'; //Add a reset button
+
+  var redo = '<h4  class="center"><br>Reset the game.<br><a class="waves-effect waves-light btn" href="javascript:window.location.reload()">Reset</a></h4>';
 
   var choose = '<h1 class="center red-text">Please select<br>your answer</h1>';
 
-  var next = '<h2 class="center">Please choose<br>next question.</h2>';
+  var next = '<h2 class="center"><br>Please choose<br>next question.</h2>';
 
   var fight = '<h2 class="center white-text">Ready to be<br>the American Code Idol?</h2>';
 
-  var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","STOP WISHING.<br>START DOING","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is<br>21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow", "Make Code<br>Your Best Friend","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","You Are The Semicolon to My STATEMENTS","Without you<br>my world is NULL","Hey MOM,<br>Can I go home?"];
+  var phrase = ["I DO NOT MAKE EXCUSE.<br> I MAKE RESULTS","SLOW PROGRESS IS BETTER THAN<br>NO PROGRESS.","THINK ABOUT<br>WHY YOU STARTED CODING", "CODE is<br>21st Century's Oxygen", "Cry Today,<br>Strong Tomorrow","<br>Coding. Smile. Repeat.","Talk is cheap.<br>Show me the code","I Was Born To Code!<br>I Was Born To Code!<br>I Was Born To Code!","Without you<br>my world is NULL","Hey MOM,<br>Can I go home?"]; //"You Are The Semicolon to My STATEMENTS"
 
   //Insert a content in top column
   $("#quiz").html(rule);
@@ -94,7 +96,7 @@ $(document).ready(function() {
         console.log(counter);
         counter = counter + 1;
         //If counter reach to 14, all question is done. If it's not, keep going
-        if (counter < 4){ //Update it later
+        if (counter < 3){ //Update it later normal# is 15
           //Show Good job message on the bottom column
           $('#message').html(good);
           //Show the message of "choose next question"
@@ -102,6 +104,8 @@ $(document).ready(function() {
         } else {
           //When complete all quiz, show up the reset button with message
           $('#message').html(complete);
+          $('#quiz').html(redo);
+
           console.log("Success");
         }
       } else {
@@ -115,9 +119,9 @@ $(document).ready(function() {
 
             for (var i=0;i<allData.length;i++){
               var newObj = {
-                id: allData[i].id.videoId, //
+                id: allData[i].id.videoId,
                 title: allData[i].snippet.title,
-              }//end of newobj
+              } //end of newobj
               localData.push(newObj);
             } //end of for loop
 
@@ -135,7 +139,7 @@ $(document).ready(function() {
             //Part4 Pick up three videos from titleArray
             var selected = '<h4 class="white-text">No worry! Watch below videos and learn about what it is!</h4><ul class="white-text"><li><a href="' + youtube + videoURL[0] +'" target="_blank">' + titleArr[0].substr(0, 50) + '</a></li><li><a href="' + youtube + videoURL[1] +'" target="_blank">' + titleArr[1].substr(0, 50) + '</a></li><li><a href="' + youtube + videoURL[2] +'" target="_blank">' + titleArr[2].substr(0,50) + '</a></li></ul>';
 
-            //Part5 show two videos on bottom column
+            // Part5 show two videos on bottom column
             $('#message').html(selected);
 
           }) //end of json
