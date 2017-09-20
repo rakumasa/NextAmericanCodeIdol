@@ -96,7 +96,7 @@ $(document).ready(function() {
         console.log(counter);
         counter = counter + 1;
         //If counter reach to 14, all question is done. If it's not, keep going
-        if (counter < 3){ //Update it later normal# is 15
+        if (counter < 2){ //Update it later normal# is 15
           //Show Good job message on the bottom column
           $('#message').html(good);
           //Show the message of "choose next question"
