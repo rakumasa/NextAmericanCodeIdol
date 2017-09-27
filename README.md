@@ -4,7 +4,9 @@ Quiz app for beginners to learn basic HTML/CSS/Javascript
 
 You can see a preview of this app in action in the following video preview:
 
-Currently, video is unavailable (Coming soon!)
+https://youtu.be/RXqqQsnfmZw
+
+[![Watch the video](images/Next_American_Code_Idol.png)](https://youtu.be/RXqqQsnfmZw)
 
 
 **About the project**
